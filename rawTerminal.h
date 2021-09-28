@@ -75,6 +75,10 @@ typedef enum keyboard_inputs {
     INPUT_X,
     INPUT_Y,
     INPUT_Z,
+    /* special keys */
+    INPUT_ENTER,
+    INPUT_BACKSPACE,
+    INPUT_ESCAPE_CHAR,
     /* direction arrows */
     INPUT_ARROW_UP,
     INPUT_ARROW_DOWN,

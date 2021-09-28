@@ -41,8 +41,7 @@ char * getKeyboardInputCharValue(keyboard_input input) {
         charValue = calloc(1, sizeof(char));
         charValue[0] = 'A' + input - 26; // the -26 offset to the correct value
         return charValue;
-    }
-    else {
+    } else if (input >= INPUT_ARROW_UP && input <= INPUT_ARROW_LEFT) {
         charValue = calloc(3, sizeof(char));
         switch (input)
         {
@@ -69,10 +68,26 @@ char * getKeyboardInputCharValue(keyboard_input input) {
             charValue[1] = 91;
             charValue[2] = 68;
             return charValue;
-
         default: return NULL;
         }
-    } 
+    } else {
+        switch (input)
+        {
+        case INPUT_ENTER:
+            charValue = calloc(1, sizeof(char));
+            charValue[0] = 10;
+            return charValue;
+        case INPUT_BACKSPACE:
+            charValue = calloc(1, sizeof(char));
+            charValue[0] = 127;
+            return charValue[0] = 10;
+        case INPUT_ESCAPE_CHAR:
+            charValue = calloc(1, sizeof(char));
+            charValue[0] = 27;
+            return charValue;
+        default: return NULL;
+        }
+    }
 }
 
 char * HandleRawModeKeyboard() {
