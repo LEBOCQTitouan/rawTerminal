@@ -80,7 +80,7 @@ char * getKeyboardInputCharValue(keyboard_input input) {
         case INPUT_BACKSPACE:
             charValue = calloc(1 + 1, sizeof(char));
             charValue[0] = (char)127;
-            return charValue[0] = 10;
+            return charValue[0] = (char)10;
         case INPUT_ESCAPE_CHAR:
             charValue = calloc(1 + 1, sizeof(char));
             charValue[0] = (char)27;
