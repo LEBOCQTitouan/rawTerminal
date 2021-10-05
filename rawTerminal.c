@@ -34,39 +34,39 @@ void disableTerminalRawMode() {
 char * getKeyboardInputCharValue(keyboard_input input) {
     char * charValue;
     if (input >= INPUT_a && input <= INPUT_z) { // is a lowercase letter
-        charValue = calloc(1, sizeof(char));
+        charValue = calloc(1 + 1, sizeof(char));
         charValue[0] = 'a' + input;
         return charValue;
     } else if (input >= INPUT_A && input <= INPUT_Z) { // is a uppercase letter
-        charValue = calloc(1, sizeof(char));
+        charValue = calloc(1 + 1, sizeof(char));
         charValue[0] = 'A' + input - 26; // the -26 offset to the correct value
         return charValue;
     } else if (input >= INPUT_ARROW_UP && input <= INPUT_ARROW_LEFT) {
-        charValue = calloc(3, sizeof(char));
+        charValue = calloc(3 + 1, sizeof(char));
         switch (input)
         {
         case INPUT_ARROW_UP:
-            charValue[0] = 27;
-            charValue[1] = 91;
-            charValue[2] = 65;
+            charValue[0] = (char)27;
+            charValue[1] = (char)91;
+            charValue[2] = (char)65;
             return charValue;
 
         case INPUT_ARROW_DOWN:
-            charValue[0] = 27;
-            charValue[1] = 91;
-            charValue[2] = 66;
+            charValue[0] = (char)27;
+            charValue[1] = (char)91;
+            charValue[2] = (char)66;
             return charValue;
 
         case INPUT_ARROW_RIGHT:
-            charValue[0] = 27;
-            charValue[1] = 91;
-            charValue[2] = 67;
+            charValue[0] = (char)27;
+            charValue[1] = (char)91;
+            charValue[2] = (char)67;
             return charValue;
 
         case INPUT_ARROW_LEFT:
-            charValue[0] = 27;
-            charValue[1] = 91;
-            charValue[2] = 68;
+            charValue[0] = (char)27;
+            charValue[1] = (char)91;
+            charValue[2] = (char)68;
             return charValue;
         default: return NULL;
         }
@@ -74,16 +74,16 @@ char * getKeyboardInputCharValue(keyboard_input input) {
         switch (input)
         {
         case INPUT_ENTER:
-            charValue = calloc(1, sizeof(char));
-            charValue[0] = 10;
+            charValue = calloc(1 + 1, sizeof(char));
+            charValue[0] = (char)10;
             return charValue;
         case INPUT_BACKSPACE:
-            charValue = calloc(1, sizeof(char));
-            charValue[0] = 127;
+            charValue = calloc(1 + 1, sizeof(char));
+            charValue[0] = (char)127;
             return charValue[0] = 10;
         case INPUT_ESCAPE_CHAR:
-            charValue = calloc(1, sizeof(char));
-            charValue[0] = 27;
+            charValue = calloc(1 + 1, sizeof(char));
+            charValue[0] = (char)27;
             return charValue;
         default: return NULL;
         }
