@@ -3,10 +3,14 @@
 // end header
 
 struct termios orig_termios; // the original config of the terminal (before raw mode)
-
 rawTerminal_action * rawTerminalActions = NULL; // all the possible action of the raw terminal
 
 void dummy() { return; }
+
+// TODO custom function handler (void ...)
+
+/* TODO temp change */
+char * buffer = NULL;
 
 void enableTerminalRawMode() {
     tcgetattr(STDIN_FILENO, &orig_termios);
@@ -18,8 +22,8 @@ void enableTerminalRawMode() {
     tcsetattr(STDIN_FILENO, TCSAFLUSH, &raw);
 
     /* init raw terminal actions*/
-    rawTerminalActions = calloc(INPUT_ARROW_LEFT + 1, sizeof(rawTerminal_action));
-    for (int i = 0; i < INPUT_ARROW_LEFT + 1; i++) {
+    rawTerminalActions = calloc(INPUT_LETTER + 1, sizeof(rawTerminal_action));
+    for (int i = 0; i < INPUT_LETTER + 1; i++) {
         rawTerminalActions[i].func.void_function = &dummy;
         rawTerminalActions[i].type = VOID_FUNCTION;
     }
@@ -104,11 +108,26 @@ char * HandleRawModeKeyboard() {
         case VOID_FUNCTION:
             rawTerminalActions[keyboardInputValue].func.void_function();
             break;
-        
+
         default:
             break;
         }
     }
+    if ((keyboardInputValue >= INPUT_a && keyboardInputValue <= INPUT_z) || (keyboardInputValue >= INPUT_A && keyboardInputValue <= INPUT_Z)) {
+        switch (rawTerminalActions[INPUT_LETTER].type)
+        {
+        case VOID_FUNCTION:
+            rawTerminalActions[INPUT_LETTER].func.void_function();
+            break;
+
+        default: break;
+        }
+    }
+
+    /* filling buffer */
+    if (buffer != NULL) free(buffer);
+    buffer = calloc(strlen(input), sizeof(char));
+    memccpy(buffer, input, strlen(input), sizeof(char));
 
     return input;
 }
@@ -136,4 +155,8 @@ void printEscapeSequence(char * str) {
 void assignActionToKeyBoardInput(keyboard_input input, rawTerminal_action * action) {
     rawTerminalActions[input].type = action->type;
     rawTerminalActions[input].func = action->func;
+}
+
+char * getBufferValue() {
+    return buffer;
 }

@@ -83,7 +83,9 @@ typedef enum keyboard_inputs {
     INPUT_ARROW_UP,
     INPUT_ARROW_DOWN,
     INPUT_ARROW_RIGHT,
-    INPUT_ARROW_LEFT
+    INPUT_ARROW_LEFT,
+    /* special */
+    INPUT_LETTER
 } keyboard_input;
 
 // https://stackoverflow.com/questions/16770690/function-pointer-to-different-functions-with-different-arguments-in-c
@@ -145,5 +147,7 @@ void printEscapeSequence(char * str);
 
 
 void assignActionToKeyBoardInput(keyboard_input input, rawTerminal_action * action);
+
+char * getBufferValue() {
 
 #endif //RAW_TERMINAL_H
