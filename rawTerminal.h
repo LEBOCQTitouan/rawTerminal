@@ -148,6 +148,6 @@ void printEscapeSequence(char * str);
 
 void assignActionToKeyBoardInput(keyboard_input input, rawTerminal_action * action);
 
-char * getBufferValue() {
+char * getBufferValue();
 
 #endif //RAW_TERMINAL_H
