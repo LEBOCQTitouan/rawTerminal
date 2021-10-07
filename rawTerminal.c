@@ -101,6 +101,11 @@ char * HandleRawModeKeyboard() {
     readReturnValue = read(STDIN_FILENO, input, RAW_TERMINAL_BUFFER_SIZE);
     input = realloc(input, readReturnValue);
 
+    /* filling buffer */
+    if (buffer != NULL) free(buffer);
+    buffer = calloc(strlen(input), sizeof(char));
+    memccpy(buffer, input, strlen(input), sizeof(char));
+
     int keyboardInputValue;
     if ((keyboardInputValue = getKeyboardInputType(input)) != -1) {
         switch (rawTerminalActions[keyboardInputValue].type)
@@ -123,11 +128,6 @@ char * HandleRawModeKeyboard() {
         default: break;
         }
     }
-
-    /* filling buffer */
-    if (buffer != NULL) free(buffer);
-    buffer = calloc(strlen(input), sizeof(char));
-    memccpy(buffer, input, strlen(input), sizeof(char));
 
     return input;
 }
