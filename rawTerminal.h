@@ -150,4 +150,11 @@ void assignActionToKeyBoardInput(keyboard_input input, rawTerminal_action * acti
 
 char * getBufferValue();
 
+/**
+ * The dummy function is a funtion used in the event handler (default function)
+*/
+void dummy();
+
+#define DUMMY_FUNCTION &dummy;
+
 #endif //RAW_TERMINAL_H
