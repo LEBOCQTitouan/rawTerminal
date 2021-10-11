@@ -2,7 +2,7 @@
 #include "rawTerminal.h"
 // end header
 
-struct termios orig_termios; // the original config of the terminal (before raw mode)
+struct termios orig_termios;                    // the original config of the terminal (before raw mode)
 rawTerminal_action * rawTerminalActions = NULL; // all the possible action of the raw terminal
 
 void dummy() { return; }
@@ -32,7 +32,8 @@ void enableTerminalRawMode() {
 void disableTerminalRawMode() {
     tcsetattr(STDIN_FILENO, TCSAFLUSH, &orig_termios);
     /** free space allocated to raw terminal actions*/
-    free(rawTerminalActions);
+    if (rawTerminalActions != NULL) free(rawTerminalActions);
+    
 }
 
 char * getKeyboardInputCharValue(keyboard_input input) {
