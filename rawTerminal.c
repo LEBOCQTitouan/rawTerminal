@@ -33,7 +33,7 @@ void disableTerminalRawMode() {
     tcsetattr(STDIN_FILENO, TCSAFLUSH, &orig_termios);
     /** free space allocated to raw terminal actions*/
     if (rawTerminalActions != NULL) free(rawTerminalActions);
-    
+    rawTerminalActions = NULL;
 }
 
 char * getKeyboardInputCharValue(keyboard_input input) {
